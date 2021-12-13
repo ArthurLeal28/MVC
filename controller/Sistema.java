@@ -1,17 +1,15 @@
-package sistema.controller;
+package controller;
 
 import sistema.model.Produto;
 import sistema.view.ViewPrincipal;
-import sistema.view.ViewProduto;
+import view.ViewProduto;
 
 // Controle Principal
 public class Sistema {
 	private ViewProduto viewProduto;
 	private ViewPrincipal viewPrincipal;
-	// Produto vetProdutos[] = new Produto[30]; // armazenar
 	private ControleProduto cProduto;
 	private ControleVenda cVenda;
-	// private ControleFuncionario cFunc;
 
 	private static Sistema instance;
 
@@ -29,9 +27,9 @@ public class Sistema {
 	}
 
 	public void init() {
-		Produto p1 = Produto.getInstance("Arroz", "Prato Fino", 25.50, 120);
-		// inserir(p1);
-		cProduto.inserir(p1);
+		cProduto.inserir(Produto.getInstance("Farinha", "Baiana", 2.50, 50));
+                cProduto.inserir(Produto.getInstance("Feijao", "Supang", 3.50, 100));
+                cProduto.inserir(Produto.getInstance("Beterraba", "oba", 2.00, 100));
 		int opcao;
 
 		do {

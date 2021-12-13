@@ -1,4 +1,4 @@
-package sistema.db;
+package db;
 
 import sistema.model.Produto;
 

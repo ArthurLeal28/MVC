@@ -1,6 +1,6 @@
-package sistema.controller;
+package controller;
 
-import sistema.db.RepositorioProduto;
+import db.RepositorioProduto;
 import sistema.model.Produto;
 
 // Regras de negocio de produto

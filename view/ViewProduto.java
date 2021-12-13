@@ -1,10 +1,10 @@
-package sistema.view;
+package view;
 
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import sistema.controller.Sistema;
+import controller.Sistema;
 import sistema.model.Produto;
 
 // Interacao com o usuario
