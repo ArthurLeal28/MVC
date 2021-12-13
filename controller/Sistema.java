@@ -30,6 +30,7 @@ public class Sistema {
 		cProduto.inserir(Produto.getInstance("Farinha", "Baiana", 2.50, 50));
                 cProduto.inserir(Produto.getInstance("Feijao", "Supang", 3.50, 100));
                 cProduto.inserir(Produto.getInstance("Beterraba", "oba", 2.00, 100));
+                cProduto.inserir(Produto.getInstance("Arroz Gran aaaa", "Prato Fino", 22.50, 120));
 		int opcao;
 
 		do {
