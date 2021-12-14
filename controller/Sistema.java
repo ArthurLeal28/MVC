@@ -1,6 +1,6 @@
 package controller;
 
-import sistema.model.Produto;
+import model.Produto;
 import sistema.view.ViewPrincipal;
 import view.ViewProduto;
 
@@ -35,13 +35,14 @@ public class Sistema {
 
 		do {
 			opcao = viewPrincipal.menu();
+                        
 			switch (opcao) {
 			case 1:
 				inserirProduto();
 				break;
 
 			case 2:
-
+                                
 				break;
 
 			case 3:

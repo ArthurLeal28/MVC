@@ -1,7 +1,7 @@
 package controller;
 
 import db.RepositorioProduto;
-import sistema.model.Produto;
+import model.Produto;
 
 // Regras de negocio de produto
 public class ControleProduto {

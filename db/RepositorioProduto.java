@@ -1,6 +1,6 @@
 package db;
 
-import sistema.model.Produto;
+import model.Produto;
 
 // Armazenamento de dados de produto
 public class RepositorioProduto {
