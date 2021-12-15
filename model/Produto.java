@@ -7,17 +7,21 @@ public class Produto {
 	private String marca;
 	private double preco;
 	private int quantidade;
+        private int estado;
 
 	// Repositorio eh responsavel por controlar o codigo
 	// private static int geraCodigo;
 
 	// construtor de copia
 	public Produto(Produto outro) {
+            if(outro!=null){
 		codigo = outro.codigo;
 		nome = outro.nome;
 		marca = outro.marca;
 		preco = outro.preco;
 		quantidade = outro.quantidade;
+                estado = outro.estado;
+            }
 	}
 
 	private Produto(String nome, String marca, double preco, int quantidade) {
@@ -25,6 +29,7 @@ public class Produto {
 		this.marca = marca;
 		this.preco = preco;
 		this.quantidade = quantidade;
+                this.estado = 1;
 	}
 
 	public static Produto getInstance(String nome, String marca, double preco,
@@ -76,5 +81,14 @@ public class Produto {
 	public void setQuantidade(int quantidade) {
 		this.quantidade = quantidade;
 	}
+
+        public int getEstado() {
+            return this.estado;
+        }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
+    }
+        
 
 }

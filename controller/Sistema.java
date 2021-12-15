@@ -1,8 +1,9 @@
 package controller;
 
 import model.Produto;
-import sistema.view.ViewPrincipal;
+import view.ViewPrincipal;
 import view.ViewProduto;
+import view.ViewVenda;
 
 // Controle Principal
 public class Sistema {
@@ -10,13 +11,16 @@ public class Sistema {
 	private ViewPrincipal viewPrincipal;
 	private ControleProduto cProduto;
 	private ControleVenda cVenda;
+        private ViewVenda viewVenda;
 
 	private static Sistema instance;
 
 	private Sistema() {
 		cProduto = new ControleProduto();
+                cVenda = new ControleVenda();
 		viewProduto = new ViewProduto();
 		viewPrincipal = new ViewPrincipal();
+                viewVenda = new ViewVenda();
 	}
 
 	// Singleton
@@ -30,7 +34,7 @@ public class Sistema {
 		cProduto.inserir(Produto.getInstance("Farinha", "Baiana", 2.50, 50));
                 cProduto.inserir(Produto.getInstance("Feijao", "Supang", 3.50, 100));
                 cProduto.inserir(Produto.getInstance("Beterraba", "oba", 2.00, 100));
-                cProduto.inserir(Produto.getInstance("Arroz Gran aaaa", "Prato Fino", 22.50, 120));
+                cProduto.inserir(Produto.getInstance("Arroz Gran", "Prato Fino", 22.50, 120));
 		int opcao;
 
 		do {
@@ -42,7 +46,7 @@ public class Sistema {
 				break;
 
 			case 2:
-                                
+                                excluir();
 				break;
 
 			case 3:
@@ -54,13 +58,13 @@ public class Sistema {
 				break;
 
 			case 5:
-//				System.out.println("\nAte mais!\n");
+                                viewPrincipal.exibirMensagem("\nAte mais!\n");
+//				
 				break;
 
 			default:
-//				System.out.println(
-//						"\n\nNao foi possivel realizar a solicitacao.\n");
-//				System.out.println("TENTE NOVAMENTE!");
+                                viewPrincipal.exibirMensagem("\n\nNao foi possivel realizar a solicitacao.\n");
+//                              
 			}
 		} while (opcao != 5);
 	}
@@ -76,6 +80,26 @@ public class Sistema {
 			viewProduto.exibirMensagem("\nErro em cadastrar produto!\n");
 		}
 	}
+        public void excluir() {
+            int codigo = viewProduto.lerCodigoProdutoExcluir();
+            if(cVenda.existirVenda(codigo)){
+                boolean resposta = cProduto.excluirVenda(codigo);
+                if(resposta)
+                    viewProduto.exibirMensagem("\nProduto excluido!\n");
+                else
+                     viewProduto.exibirMensagem("\nErro em excluir!\n");
+            }else{
+                boolean resposta = cProduto.excluir(codigo);
+                if(resposta)
+                    viewProduto.exibirMensagem("\nProduto excluido!\n");
+                else
+                     viewProduto.exibirMensagem("\nErro em excluir!\n");
+            }
+               
+                
+                
+	
+	}
 
 	public void alterarProduto() {
 		listarProdutos();
@@ -86,27 +110,52 @@ public class Sistema {
 			if (prodAlterado != null) { 
 				// ==null eh pq a alteracao foi cancelada
 				if (cProduto.alterar(prod))
-					viewProduto.exibirMensagem(
-							"\nProduto alterado com sucesso!\n");
+					viewProduto.exibirMensagem("\nProduto alterado com sucesso!\n");
 				else
-					viewProduto
-							.exibirMensagem("\nErro em alterar produto!\n");
+					viewProduto.exibirMensagem("\nErro em alterar produto!\n");
 			}
 		} else
 			viewProduto.exibirMensagem("\nErro: codigo nao encontrado!\n");
 
 	}
 
-	public boolean excluirProduto(int codProduto) {
-		// nao eh possivel excluir produto que ja tenha vendas realizadas
-		if (!cVenda.existirVenda(codProduto))
-			return cProduto.excluir(codProduto);
-		else
-			return false;
-	}
+	
 
 	public void listarProdutos() {
-		Produto[] lista = cProduto.listar();
-		viewProduto.listar(lista);
+                Produto aux2[];
+                Produto aux[];
+               int opcao;
+            do {
+                opcao = viewPrincipal.menuListar();
+                switch (opcao) {
+		case 1:
+                        int codigo = viewProduto.lerCodigoProduto();
+                        Produto aux1[] = new Produto[1];
+                        aux1[0] = cProduto.buscar(codigo);
+                        if(aux1[0]!=null){
+                            viewProduto.odernarTabela(aux1);
+                        }else
+                           viewProduto.exibirMensagem("Produto não existe");
+			
+                        break;
+                case 2:
+                        aux2 = cProduto.buscarOrdemCadastro();
+                        viewProduto.odernarTabela(aux2);
+                        break;
+                case 3:
+                        aux2 = cProduto.ordenar();
+                        viewProduto.odernarTabela(aux2);
+                        break;
+		 
+		case 4:
+			viewPrincipal.exibirMensagem("\nAte mais!\n");
+			break;
+
+		default:
+			viewPrincipal.exibirMensagem("\nCodigo inserido eh invalido! Retornando para o menu...\n");
+			
+		}
+            } while (opcao!= 4);
+		
 	}
 }

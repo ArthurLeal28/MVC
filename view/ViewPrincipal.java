@@ -1,11 +1,12 @@
-package sistema.view;
+package view;
 
 import java.util.Scanner;
 
 
 public class ViewPrincipal {
+        Scanner scn = new Scanner(System.in);
 	public int menu() {
-		Scanner scn = new Scanner(System.in);
+		
 		// UIProduto uiProduto = new UIProduto();
 		int opcao;
 		
@@ -21,4 +22,13 @@ public class ViewPrincipal {
 
 		
 	}
+        public int menuListar(){
+                System.out.println("\n\nCENTRAL DE CONTROLE - Listagem\n");
+		System.out.println(" 1 - Detalhar um produto");
+		System.out.println(" 2 - Exibir todos os produtos (ORDEM DE CADASTRO)");
+		System.out.println(" 3 - Exibir todos os produtos (ORDEM ALFABETICA)");
+		System.out.println(" 4 - Sair do sistema\n");
+		System.out.print("Insira o codigo da acao que deseja executar: ");
+                return scn.nextInt();
+        }
 }

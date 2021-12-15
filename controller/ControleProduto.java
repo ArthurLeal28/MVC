@@ -32,15 +32,29 @@ public class ControleProduto {
 	}
 
 	public boolean excluir(int codProduto) {
-		return repoProduto.excluir(codProduto);
+                Produto p = repoProduto.buscar(codProduto);
+                if(p != null)
+                    return repoProduto.excluir(p);  
+                else 
+                    return false;
+	}
+        public boolean excluirVenda(int codProduto) {
+                Produto p = repoProduto.buscar(codProduto);
+                if(p != null)
+                    return repoProduto.excluirVenda(p);  
+                else 
+                    return false;
 	}
 
 	public Produto buscar(int codigo) {
 		return repoProduto.buscar(codigo);
 	}
-
-	public Produto[] listar() {
-		return repoProduto.listar();
-	}
+        public Produto[] buscarOrdemCadastro(){
+            return repoProduto.ordemCadastro();
+        }
+        public Produto[] ordenar(){
+            return repoProduto.ordemAlf();
+        }
+	
 
 }

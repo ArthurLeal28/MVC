@@ -4,8 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import controller.Sistema;
-import sistema.model.Produto;
+import model.Produto;
 
 // Interacao com o usuario
 public class ViewProduto {
@@ -42,12 +41,11 @@ public class ViewProduto {
 
 	public Produto alterar(Produto produto) {
 		// menu para saber o que sera alterado
-//		System.out.print("Informe o nome do produto: ");		
-//		String nome = scn.next();
-		String nome = JOptionPane.showInputDialog("Informe o nome do produto",produto.getNome());
+		System.out.println("Informe o nome do produto: "+produto.getNome());		
+		String nome = scn.next();
 		produto.setNome(nome);
 
-		System.out.print("Informe a marca do produto: ");
+		System.out.println("Informe a marca do produto: ");
 		String marca = scn.next();
 		produto.setMarca(marca);
 		
@@ -89,4 +87,71 @@ public class ViewProduto {
 		int codigo = scn.nextInt();
 		return codigo;
 	}
+        public int lerCodigoProdutoExcluir() {
+		System.out.print("Código do Produto a ser excluido : ");
+		int codigo = scn.nextInt();
+		return codigo;
+	}
+       
+        public int lerCodigoProduto() {
+		System.out.print("Insira o codigo do produto que deseja : ");
+                int codigo = scn.nextInt();
+		return codigo;
+	}
+        public void odernarTabela(Produto produtos[]){
+            int maiorNome = 0;
+            int maiorMarca= 0;
+            String nome = "Nome";
+            String marca = "Marca";
+            int nomeN = nome.length(); 
+            int marcaN = marca.length();
+                for(int x=0;x<produtos.length;x++){
+                    if(produtos[x]!=null){
+                        if(maiorNome<produtos[x].getNome().length()){
+                            maiorNome=produtos[x].getNome().length(); 
+                        }
+                        if(maiorMarca<produtos[x].getMarca().length()){
+                            maiorMarca = produtos[x].getMarca().length();
+                        }
+                    }
+                }
+                for(int x=0;x<produtos.length;x++){
+                    if(produtos[x]!=null){
+                        if(maiorNome>produtos[x].getNome().length()){
+                            int diferenca = maiorNome-produtos[x].getNome().length();
+                            for(int j=0;j<diferenca;j++){
+                                produtos[x].setNome(produtos[x].getNome()+" ");
+                            }
+                        }
+                        if(maiorMarca>produtos[x].getMarca().length()){
+                            int diferenca = maiorMarca-produtos[x].getMarca().length();
+                            for(int j=0;j<diferenca;j++){
+                               produtos[x].setMarca( produtos[x].getMarca()+" ");
+                            }
+                        }
+                    }
+                }
+                int diferencaN = maiorNome-nomeN;
+                for(int j=0;j<diferencaN;j++){
+                    nome = nome+" ";
+                }
+                int diferencaM = maiorMarca-marcaN;
+                for(int j=0;j<diferencaM;j++){
+                    marca = marca+" ";
+                }
+                gerarTabela(produtos,nome,marca);
+        }
+        
+        public void gerarTabela(Produto produtos[],String nome,String marca){
+           
+           System.out.println("Codigo  | "+nome+" | "+marca+" | "+"Preco  | Quantidade  |");
+           for(int indice=0;indice<produtos.length;indice++){
+               if(produtos[indice]!=null){
+               System.out.print(produtos[indice].getCodigo()+"       | "+produtos[indice].getNome()+" | "+produtos[indice].getMarca()+" |  ");
+               System.out.printf("%.2f",produtos[indice].getPreco());
+               System.out.print("  | "+produtos[indice].getQuantidade()+"\n");    
+               }
+           }
+               
+      }
 }
